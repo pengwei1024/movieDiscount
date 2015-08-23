@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--首页滑动菜单配置-->
+    <string-array name="slide_menu_value">
+        <item>首页</item>
+        <item>影友圈</item>
+        <item>影评</item>
+        <item>设置</item>
+    </string-array>
+    <string-array name="slide_menu_icon">
+        <item>ic_drawer_collect</item>
+        <item>ic_drawer_follow</item>
+        <item>ic_drawer_draft</item>
+        <item>ic_drawer_explore</item>
+    </string-array>
+</resources>

@@ -1,0 +1,7 @@
+<resources>
+
+    <!--系统默认样式-->
+    <style name="AppTheme" parent="MaterialDrawerTheme.Light.DarkToolbar.TranslucentStatus">
+    </style>
+
+</resources>
