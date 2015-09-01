@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.apkfuns.moviediscount.R;
+import com.apkfuns.moviediscount.fragment.MainFragment;
 import com.apkfuns.moviediscount.fragment.base.BaseFragment;
 import com.apkfuns.moviediscount.ui.base.BaseActivity;
 import com.mikepenz.materialdrawer.Drawer;
@@ -41,11 +42,15 @@ public class MainActivity extends BaseActivity implements Drawer.OnDrawerItemCli
         if (savedInstanceState == null) {
             result.setSelectionByIdentifier(0, false);
         }
+        setPage(new MainFragment());
     }
 
     @Override
     public boolean onItemClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
         switch (i) {
+            case 0:
+                setPage(new MainFragment());
+                break;
             default:
                 break;
         }

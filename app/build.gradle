@@ -1,21 +1,45 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'movieDiscount'
+            keyPassword 'wei8888go'
+            storeFile file('../pengwei_keystore.jks')
+            storePassword 'pengwei'
+        }
+    }
     compileSdkVersion 21
     buildToolsVersion "23.0.0"
-
     defaultConfig {
         applicationId "com.apkfuns.moviediscount"
         minSdkVersion 10
         targetSdkVersion 21
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
+        project.archivesBaseName = "movieDiscount"
     }
     buildTypes {
         release {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            zipAlignEnabled true
             minifyEnabled false
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
+        debug {
+            signingConfig signingConfigs.config
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    android.applicationVariants.all { variant ->
+        def file = variant.outputs[0].outputFile
+        variant.outputs[0].outputFile = new File(file.parent, file.name.replace(".apk", "-" + defaultConfig.versionName + ".apk"))
     }
 }
 
@@ -28,4 +52,7 @@ dependencies {
     compile 'com.facebook.fresco:fresco:0.5.1+'
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile files('libs/xUtils-2.6.14.jar')
+    compile project(':umeng_community')
+    compile 'com.apkfuns.logutils:library:1.0.6'
+    compile files('libs/locSDK_6.11.jar')
 }

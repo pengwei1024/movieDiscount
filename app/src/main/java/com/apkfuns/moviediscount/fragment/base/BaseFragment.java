@@ -35,40 +35,45 @@ public class BaseFragment extends Fragment {
 
     /**
      * 获取控件
+     *
      * @param parent
      * @param id
      * @param <T>
      * @return
      */
-    protected <T extends View> T getViewById(View parent, int id){
+    protected <T extends View> T getViewById(View parent, int id) {
         return (T) parent.findViewById(id);
     }
 
     /**
      * 设置标题
+     *
      * @param title
      */
-    protected void setTitle(String title){
+    protected void setTitle(String title) {
         getActivity().setTitle(title);
     }
 
     /**
      * 启动Activity
+     *
      * @param cla
      */
-    protected void startActivity(Class<? extends Activity> cla){
+    protected void startActivity(Class<? extends Activity> cla) {
         Intent it = new Intent(getActivity(), cla);
         startActivity(it);
     }
 
 
     /////////////////提示框/////////////////////////////
+
     /**
      * 弹出选择菜单
+     *
      * @param items
      * @param listener
      */
-    protected AlertDialog showDialogMenu(String[] items, AdapterView.OnItemClickListener listener){
+    protected AlertDialog showDialogMenu(String[] items, AdapterView.OnItemClickListener listener) {
         Context context = getActivity();
         if (builder == null) {
             builder = new AlertDialog.Builder(context);
@@ -138,7 +143,8 @@ public class BaseFragment extends Fragment {
 
     /**
      * 弹出框提示
-     * @param message 内容
+     *
+     * @param message  内容
      * @param listener 事件监听
      */
     protected void showDialog(String message,
@@ -152,38 +158,44 @@ public class BaseFragment extends Fragment {
 
 
     ///////////////////网络请求封装//////////////////////
+
     /**
      * get请求
+     *
      * @param url
      * @param list
      * @param requestCode
      */
-    protected void getRequest(String url, List<BasicNameValuePair> list, int requestCode){
+    protected void getRequest(String url, List<BasicNameValuePair> list, int requestCode) {
         sendRequest(HttpRequest.HttpMethod.GET, url, list, requestCode);
     }
 
     /**
      * post请求
+     *
      * @param url
      * @param list
      * @param requestCode
      */
-    protected void postRequest(String url, List<BasicNameValuePair> list, int requestCode){
+    protected void postRequest(String url, List<BasicNameValuePair> list, int requestCode) {
         sendRequest(HttpRequest.HttpMethod.POST, url, list, requestCode);
     }
 
     /**
      * 发送请求
+     *
      * @param method
      * @param url
      * @param list
      * @param requestCode
      */
     private void sendRequest(HttpRequest.HttpMethod method, String url, List<BasicNameValuePair> list,
-                             final int requestCode){
+                             final int requestCode) {
         RequestParams params = new RequestParams();
-        for (BasicNameValuePair pair : list){
-            params.addBodyParameter(pair.getName(), pair.getValue());
+        if (list != null) {
+            for (BasicNameValuePair pair : list) {
+                params.addBodyParameter(pair.getName(), pair.getValue());
+            }
         }
         getHttpUtils().send(method, url, params, new RequestCallBack<String>() {
             @Override
@@ -200,10 +212,11 @@ public class BaseFragment extends Fragment {
 
     /**
      * 获得HttpUtil对象
+     *
      * @return
      */
-    protected HttpUtils getHttpUtils(){
-        if(httpUtils == null){
+    protected HttpUtils getHttpUtils() {
+        if (httpUtils == null) {
             httpUtils = new HttpUtils();
         }
         return httpUtils;
@@ -212,41 +225,46 @@ public class BaseFragment extends Fragment {
 
     /**
      * 请求结果处理
+     *
      * @param requestCode 请求码
-     * @param result 返回内容
-     * @param success 是否请求成功
+     * @param result      返回内容
+     * @param success     是否请求成功
      */
-    protected void onRequestCallBack(int requestCode, String result, boolean success){
+    protected void onRequestCallBack(int requestCode, String result, boolean success) {
 
     }
 
 
     /**
      * 字符串是否为空
+     *
      * @param str
      * @return
      */
-    protected boolean isEmptyString(String str){
+    protected boolean isEmptyString(String str) {
         return TextUtils.isEmpty(str);
     }
 
     /**
      * 对象是否为空
+     *
      * @param o
      * @return
      */
-    protected boolean notNull(Object o){
+    protected boolean notNull(Object o) {
         return o != null;
     }
 
     /**
      * toast提示
+     *
      * @param msg
      */
-    protected void showToast(String msg){
+    protected void showToast(String msg) {
         Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
     }
-    protected void showToast(int msg){
+
+    protected void showToast(int msg) {
         showToast(getActivity().getString(msg));
     }
 
